@@ -7,7 +7,7 @@
 3. Start server by typing "npm run start:watch" into your terminal
 4. Open Postman and paste "http://localhost:6660/api/closest-bot" into request url 
 5. Switch "GET" verb to "POST"
-6. Select buttons as shown in the image below
+6. Select buttons as shown in the image below, making sure to switch "Text" to "JSON"
 7. Enter the following JSON with any x, y coordinate and hit send 
   ```
   {
