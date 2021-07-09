@@ -17,7 +17,7 @@ app.post('/api/closest-bot', async (req, res) => {
   for(let i = 0; i < botPositionData.length; i++){
     const distanceToGoal = calcDistance(req.body, botPositionData[i])
 
-    //adds distanceToGoal to bot object
+    //adds distanceToGoal key to bot object
     botPositionData[i].distanceToGoal = distanceToGoal
 
     //strips off x and y keys to match response example
