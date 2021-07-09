@@ -4,9 +4,16 @@ const axios = require('axios');
 
 app.use(express.json())
 
-app.post('/api/closest-bot', (req, res) => {
-  const data = validateInput(req.body)
-  res.send(data)
+app.post('/api/closest-bot', async (req, res) => {
+  const validated = validateInput(req.body)
+  if(!validated) return res.send({Error: 'Not a valid input'})
+  
+  const botPositionData = await botFetch()
+
+  for(let i = 0; i < botPositionData.length; i++){
+    const distance = calcDistance(req.body, botPositionData[i])
+    console.log(distance)
+  }
 }) 
 
 const validateInput = ({ x: xCord, y: yCord }) => {
@@ -17,8 +24,15 @@ const validateInput = ({ x: xCord, y: yCord }) => {
   else return false;
 }
 
+const calcDistance = (loadPoints, botPoints) => {
+  const { x: x1, y: y1} = loadPoints
+  const { x: x2, y: y2} = botPoints
+
+  return Math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+}
+
 const botFetch = () => {
-  axios.get('https://60c8ed887dafc90017ffbd56.mockapi.io/robots')
+  return axios.get('https://60c8ed887dafc90017ffbd56.mockapi.io/robots')
   .then(({ data }) => data)
 
   .catch(error => {
