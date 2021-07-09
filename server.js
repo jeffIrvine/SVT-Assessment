@@ -12,8 +12,13 @@ app.post('/api/closest-bot', async (req, res) => {
 
   for(let i = 0; i < botPositionData.length; i++){
     const distance = calcDistance(req.body, botPositionData[i])
-    console.log(distance)
+    botPositionData[i].distanceToGoal = distance
   }
+  console.log(botPositionData)
+  // botPositionData.sort((a, b) => {
+  //   return calcDistance(req.body, a) - calcDistance(req.body, b)
+  // })
+
 }) 
 
 const validateInput = ({ x: xCord, y: yCord }) => {
