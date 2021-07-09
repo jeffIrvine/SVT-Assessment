@@ -5,6 +5,7 @@ const app = express()
 
 app.use(express.json())
 
+
 app.post('/api/closest-bot', async (req, res) => {
   //checks that post request(input) is a number
   const validated = validateInput(req.body)
